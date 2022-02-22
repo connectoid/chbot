@@ -2,7 +2,6 @@ import json
 import logging
 import os
 import sys
-import time
 from http import HTTPStatus
 
 import requests
@@ -146,12 +145,13 @@ def parse_weather(weather):
 def post_weather(update, context):
     chat = update.effective_chat
     city = update.message.text
+    name = update.message.chat.first_name
     context.bot.send_message(
         chat_id=chat.id, text=f'В настоящий момент погода в {city} такая:'
         )
     weather = get_weather_api(city)
     parsed_weather = parse_weather(weather)
-    print('* * * * * *', city, '* * * * * *')
+    print(f'* * * * * * {name} запросил информацию о погоде в {city} * * * * * *')
     print_weather(parsed_weather)
     weather_for_post = prepare_weather_for_post(parsed_weather)
     context.bot.send_message(chat_id=chat.id, text=weather_for_post)
