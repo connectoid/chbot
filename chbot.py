@@ -145,7 +145,10 @@ def parse_weather(weather):
 
 def post_weather(update, context):
     chat = update.effective_chat
-    city = update.message.text
+    if update.message.text == 'Угольные Копи':
+        city = '64.74 177.67'
+    else:
+        city = update.message.text
     name = update.message.chat.first_name
     context.bot.send_message(
         chat_id=chat.id, text=f'В настоящий момент погода в {city} такая:'
@@ -162,7 +165,7 @@ def wake_up(update, context):
     chat = update.effective_chat
     name = update.message.chat.first_name
     buttons = ReplyKeyboardMarkup([
-                ['Провидения', 'Анадырь', 'Аэропорт Анадырь'],
+                ['Провидения', 'Анадырь', 'Угольные Копи'],
                 ['Эгвекинот', 'Лаврентия', 'Мыс Шмидта'],
                 ['Певек', 'Билибино', 'Беринговский']
             ])
