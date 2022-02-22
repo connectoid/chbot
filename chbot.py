@@ -34,6 +34,7 @@ WEATHER_KEYS = {
     'vis_km': 'Видимость, км',
     'pressure_mb': 'Давление, мБ',
     'humidity': 'Влажность, %',
+    'last_updated': 'Обновлено:'
 }
 
 TOKENS = ('WEATHER_API', 'TELEGRAM_TOKEN', 'TELEGRAM_CHAT_ID')
@@ -161,7 +162,7 @@ def wake_up(update, context):
     chat = update.effective_chat
     name = update.message.chat.first_name
     buttons = ReplyKeyboardMarkup([
-                ['Провидения', 'Анадырь', 'Уголльные копи'],
+                ['Провидения', 'Анадырь', 'Аэропорт Анадырь'],
                 ['Эгвекинот', 'Лаврентия', 'Мыс Шмидта'],
                 ['Певек', 'Билибино', 'Беринговский']
             ])
