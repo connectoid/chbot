@@ -2,6 +2,7 @@ import json
 import logging
 import os
 import sys
+import time
 from http import HTTPStatus
 
 import requests
@@ -18,6 +19,8 @@ WEATHER_API = os.getenv('WEATHER_API')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
 
 ENDPOINT = 'http://api.weatherapi.com/v1/current.json'
+
+RETRY_TIME = 600
 
 WEATHER_KEYS = {
     'temp_c': 'Температура, С',
@@ -167,6 +170,7 @@ def wake_up(update, context):
         reply_markup=buttons
         )
 
+
 def main():
     updater.dispatcher.add_handler(CommandHandler('start', wake_up))
 
@@ -174,6 +178,17 @@ def main():
 
     updater.start_polling()
     updater.idle() 
+
+    while True:
+        try:
+            weather = get_weather_api('Провидения')
+            print(weather)
+            time.sleep(RETRY_TIME)
+        except Exception as error:
+            message = f'Сбой в работе программы: {error}'
+            logger.critical(message)
+            time.sleep(RETRY_TIME)
+
 
 if __name__ == '__main__':
     main()
