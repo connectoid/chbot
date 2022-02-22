@@ -41,8 +41,7 @@ TOKENS = ('WEATHER_API', 'TELEGRAM_TOKEN', 'TELEGRAM_CHAT_ID')
 
 
 bot = Bot(token=TELEGRAM_TOKEN)
-
-updater = Updater(token='5288168645:AAE8HpNnM99UMyk-GVlhDGxvu7LGfqOksWQ')
+updater = Updater(token=TELEGRAM_TOKEN)
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)
@@ -114,7 +113,7 @@ def get_weather_api(city):
                 return response.json()
             except json.decoder.JSONDecodeError as error:
                 logger.error(
-                    f'Cбой при преобразовании ответа в JSONL: {error}'
+                    f'Cбой при преобразовании ответа в JSON: {error}'
                 )
 
 
