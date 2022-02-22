@@ -16,7 +16,6 @@ load_dotenv()
 
 WEATHER_API = os.getenv('WEATHER_API')
 TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
-TELEGRAM_CHAT_ID = os.getenv('TELEGRAM_CHAT_ID')
 
 ENDPOINT = 'http://api.weatherapi.com/v1/current.json'
 
@@ -39,7 +38,6 @@ TOKENS = ('WEATHER_API', 'TELEGRAM_TOKEN', 'TELEGRAM_CHAT_ID')
 
 
 bot = Bot(token=TELEGRAM_TOKEN)
-chat_id = TELEGRAM_CHAT_ID
 
 updater = Updater(token='5288168645:AAE8HpNnM99UMyk-GVlhDGxvu7LGfqOksWQ')
 
@@ -169,10 +167,13 @@ def wake_up(update, context):
         reply_markup=buttons
         )
 
+def main():
+    updater.dispatcher.add_handler(CommandHandler('start', wake_up))
 
-updater.dispatcher.add_handler(CommandHandler('start', wake_up))
+    updater.dispatcher.add_handler(MessageHandler(Filters.text, post_weather))
 
-updater.dispatcher.add_handler(MessageHandler(Filters.text, post_weather))
+    updater.start_polling()
+    updater.idle() 
 
-updater.start_polling()
-updater.idle() 
+if __name__ == '__main__':
+    main()
