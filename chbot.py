@@ -151,7 +151,7 @@ def post_weather(update, context):
         )
     weather = get_weather_api(city)
     parsed_weather = parse_weather(weather)
-    print(city)
+    print('* * * * * *', city, '* * * * * *')
     print_weather(parsed_weather)
     weather_for_post = prepare_weather_for_post(parsed_weather)
     context.bot.send_message(chat_id=chat.id, text=weather_for_post)
