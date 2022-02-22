@@ -1,0 +1,2 @@
+class WrongEndpointException(Exception):
+    pass
