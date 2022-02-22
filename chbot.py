@@ -178,17 +178,7 @@ def main():
     updater.dispatcher.add_handler(MessageHandler(Filters.text, post_weather))
 
     updater.start_polling()
-    updater.idle() 
-
-    while True:
-        try:
-            weather = get_weather_api('Провидения')
-            print(weather)
-            time.sleep(RETRY_TIME)
-        except Exception as error:
-            message = f'Сбой в работе программы: {error}'
-            logger.critical(message)
-            time.sleep(RETRY_TIME)
+    updater.idle()
 
 
 if __name__ == '__main__':
